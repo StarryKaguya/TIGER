@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.json
 
 # C extensions
 *.so
@@ -192,3 +193,90 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+############################################################
+# TIGER / RecSys: large files (datasets, checkpoints, logs)
+############################################################
+
+# --- Data folders (recommended: put ALL large data under these) ---
+data/
+dataset/
+datasets/
+raw_data/
+raw/
+processed/
+processed_data/
+preprocessed/
+corpus/
+corpora/
+splits/
+
+# Keep directory placeholders if you want the folders to exist in repo
+!data/.gitkeep
+!dataset/.gitkeep
+!datasets/.gitkeep
+
+# --- Training outputs / experiment artifacts ---
+checkpoints/
+checkpoint/
+ckpt/
+weights/
+pretrained/
+outputs/
+output/
+results/
+result/
+exp_outputs/
+runs/
+run/
+logs/
+log/
+tb_logs/
+tensorboard/
+lightning_logs/
+wandb/
+
+# --- Caches / temp ---
+.cache/
+cache/
+tmp/
+temp/
+*.tmp
+*.swp
+
+# --- Model weights / embeddings / indices (often huge) ---
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.onnx
+
+# --- Numpy / pickle / feature dumps ---
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.joblib
+
+# --- Large dataset formats (common in TIGER pipelines) ---
+*.parquet
+*.arrow
+*.feather
+*.h5
+*.hdf5
+*.tfrecord
+*.tfrecords
+
+# --- Compressed datasets (prefer to ignore the common dataset compressions) ---
+*.jsonl.gz
+*.json.gz
+*.csv.gz
+*.tsv.gz
+*.pkl.gz
+*.parquet.gz
+
+# --- Retrieval / ANN index files (FAISS, etc.) ---
+*.faiss
+*.index
+*.ann

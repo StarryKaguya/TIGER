@@ -13,7 +13,7 @@ class ResidualVectorQuantizer(nn.Module):
     def __init__(self, n_e_list, e_dim, sk_epsilons, beta = 0.25,
                  kmeans_init = False, kmeans_iters = 100, sk_iters=100,):
         super().__init__()
-        self.n_e_list = n_e_list
+        self.n_e_list = n_e_list # num_emb_list=[256,256,256,256], codebook 数量列表
         self.e_dim = e_dim
         self.num_quantizers = len(n_e_list)
         self.beta = beta
@@ -53,4 +53,4 @@ class ResidualVectorQuantizer(nn.Module):
         mean_losses = torch.stack(all_losses).mean()
         all_indices = torch.stack(all_indices, dim=-1)
 
-        return x_q, mean_losses, all_indices
+        return x_q, mean_losses, all_indices # x_q: quantized output

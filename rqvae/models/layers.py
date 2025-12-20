@@ -84,15 +84,18 @@ def kmeans(
 
 @torch.no_grad()
 def sinkhorn_algorithm(distances, epsilon, sinkhorn_iterations):
-    Q = torch.exp(- distances / epsilon)
+    # sk_epsilon=0.003 
+    # distances: [B, K] (B个样本，K个聚类中心)
+    # 通过列归一化，抑制热门，扶持冷门
+    Q = torch.exp(- distances / epsilon) # Q_ij 代表样本 i 分配给中心 j 的概率/权重
 
     B = Q.shape[0] # number of samples to assign
     K = Q.shape[1] # how many centroids per block (usually set to 256)
 
     # make the matrix sums to 1
-    sum_Q = Q.sum(-1, keepdim=True).sum(-2, keepdim=True)
-    Q /= sum_Q
-    # print(Q.sum())
+    sum_Q = Q.sum(-1, keepdim=True).sum(-2, keepdim=True) # shape=(1,1)
+    Q /= sum_Q # 归一化，使得所有元素和为1
+
     for it in range(sinkhorn_iterations):
 
         # normalize each column: total weight per sample must be 1/B

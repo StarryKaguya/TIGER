@@ -5,7 +5,9 @@ import numpy as np
 
 
 class EmbDataset(data.Dataset):
-
+    '''
+    把硬盘里的 Parquet 文件加载到内存中，并“清洗”成 PyTorch 训练能直接使用的 Tensor 格式。
+    '''
     def __init__(self,data_path):
 
         self.data_path = data_path
